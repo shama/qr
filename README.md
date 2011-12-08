@@ -1,7 +1,9 @@
+# Qr Helper
+
 Simple displaying of QR codes.
 See http://code.google.com/apis/chart/docs/gallery/qr_codes.html for more infos.
 
-Tested with cakePHP 1.3.3
+For CakePHP 2.0
 
 Includes functions to create QR codes for:
 * free text
@@ -15,9 +17,16 @@ Includes functions to create QR codes for:
 * Telephone calls
 * URLs
 
-Usage:
-* Copy the "qrcode.php" to your "app/views/helpers" folder.
-* In the Controller add 'Qrcode' to you helpers array.
-* In the view for example do "<? echo $this->Qrcode->text('Hello World'); ?>"
+## Usage
+
+Download and extract into `app/Plugin/Qr`
+
+OR
+
+`cd` into your app folder and run: git clone git://github.com/shama/qr.git Plugin/Qr
+
+## Examples
+
+In the view for example do "<? echo $this->Qrcode->text('Hello World'); ?>"
 
 Second parameter always is an optional option array. For explanation of these options and the required parameter for each function read the well documented Code. :)

@@ -5,18 +5,20 @@
  * TODO: better checking of limits and valid inputs
  * 
  * @author Max Dörfler <max@muxe.org>
+ *	Modified by Kyle Robinson Young <kyle at dontkry.com>
  *
  */
-class QrcodeHelper extends AppHelper {
+App::uses('AppHelper', 'View/Helper');
+class QrHelper extends AppHelper {
 	
-	var $helpers = array('Html');
+	public $helpers = array('Html');
 	
 	/** 
 	 * Size in pixels
 	 * 
-	 * @var string
+	 * @public string
 	 */
-	var $size = '350x350';
+	public $size = '350x350';
 	
 	/** 
 	 * Encoding:
@@ -24,9 +26,9 @@ class QrcodeHelper extends AppHelper {
 	 * 	Shift_JIS
 	 * 	ISO-8859-1
 	 * 
-	 * @var string Encoding
+	 * @public string Encoding
 	 */
-	var $encode = 'UTF-8';
+	public $encode = 'UTF-8';
 	
 	/** 
 	 * Error correction level
@@ -35,23 +37,23 @@ class QrcodeHelper extends AppHelper {
      * Q - Allows recovery of up to 25% data loss
      * H - Allows recovery of up to 30% data loss
      * 
-	 * @var string Error correction level
+	 * @public string Error correction level
 	 */
-	var $error_correction = 'L';
+	public $error_correction = 'L';
 	
 	/** 
 	 * The width of the white border around the data portion of the chart. This is in rows, not in pixels.
 	 * 
-	 * @var integer
+	 * @public integer
 	 */
-	var $margin = 4;
+	public $margin = 4;
 	
 	/** 
 	 * The Base URL to the QR-Code Generation API
 	 * 
-	 * @var string
+	 * @public string
 	 */
-	var $base_url = 'http://chart.apis.google.com/chart?cht=qr&chl=';
+	public $base_url = 'http://chart.apis.google.com/chart?cht=qr&chl=';
 	
 	/**
 	 * Encode Text. You can use plaintext or encode Infos in whatever format you want.
@@ -256,4 +258,3 @@ class QrcodeHelper extends AppHelper {
 	}
 
 }
-?>
