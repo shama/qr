@@ -10,26 +10,25 @@
  */
 App::uses('AppHelper', 'View/Helper');
 class QrHelper extends AppHelper {
-	
 	public $helpers = array('Html');
-	
+
 	/** 
 	 * Size in pixels
 	 * 
-	 * @public string
+	 * @var string
 	 */
 	public $size = '350x350';
-	
+
 	/** 
 	 * Encoding:
 	 * 	UTF-8 [Default]
 	 * 	Shift_JIS
 	 * 	ISO-8859-1
 	 * 
-	 * @public string Encoding
+	 * @var string Encoding
 	 */
 	public $encode = 'UTF-8';
-	
+
 	/** 
 	 * Error correction level
 	 * L - [Default] Allows recovery of up to 7% data loss
@@ -37,34 +36,34 @@ class QrHelper extends AppHelper {
      * Q - Allows recovery of up to 25% data loss
      * H - Allows recovery of up to 30% data loss
      * 
-	 * @public string Error correction level
+	 * @var string Error correction level
 	 */
 	public $error_correction = 'L';
-	
+
 	/** 
 	 * The width of the white border around the data portion of the chart. This is in rows, not in pixels.
 	 * 
-	 * @public integer
+	 * @var integer
 	 */
 	public $margin = 4;
-	
+
 	/** 
 	 * The Base URL to the QR-Code Generation API
 	 * 
-	 * @public string
+	 * @var string
 	 */
 	public $base_url = 'http://chart.apis.google.com/chart?cht=qr&chl=';
-	
+
 	/**
 	 * Encode Text. You can use plaintext or encode Infos in whatever format you want.
 	 * 
 	 * @param string $text Text to encode
 	 * @param mixed $options options array, see helper vars for description of parameters
 	 */
-	function text($text = '', $options = array()) {
+	public function text($text = '', $options = array()) {
 		return $this->Html->image($this->base_url . urlencode($text) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * Encode an URL. Behaves like the usual Cake URLs. Takes
 	 * full URLs like "http://www.google.com"
@@ -74,21 +73,21 @@ class QrHelper extends AppHelper {
 	 * @param string|mixed $url URL to encode
 	 * @param mixed $options options array, see helper vars for description of parameters
 	 */
-	function url($url = '', $options = array()) {
+	public function url($url = '', $options = array()) {
 		$url = Router::url($url, true);
 		return $this->Html->image($this->base_url . urlencode($url) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * Encode an email (Clients should see the possibility to send an email)
 	 * 
 	 * @param $mail Email Address
 	 * @param mixed $options options array, see helper vars for description of parameters
 	 */
-	function email($mail = '', $options = array()) {
+	public function email($mail = '', $options = array()) {
 		return $this->Html->image($this->base_url . urlencode('mailto:' . $mail) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * A tel URI should be used to encode a telephone number, to ensure that the digits are understood as a telephone number. 
 	 * Further, it is advisable to include prefixes that make the number accessible internationally. 
@@ -98,10 +97,10 @@ class QrHelper extends AppHelper {
 	 * @param string $phone Phonenumber
 	 * @param mixed $options options array, see helper vars for description of parameters
 	 */
-	function telephone($phone = '', $options = array()) {
+	public function telephone($phone = '', $options = array()) {
 		return $this->Html->image($this->base_url . urlencode('tel:' . $phone) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * A MEMCARD contact
 	 * 
@@ -116,7 +115,7 @@ class QrHelper extends AppHelper {
 	 * @param array $contact
 	 * @param array $options options array, see helper vars for description of parameters
 	 */
-	function contact($contact = array(), $options = array()) {
+	public function contact($contact = array(), $options = array()) {
 		$ret = 'MECARD:';
 		if (isset($contact['name'])) {
 			$ret .= 'N:'.$contact['name'].';';
@@ -139,27 +138,27 @@ class QrHelper extends AppHelper {
 		$url = $this->base_url . urlencode($ret) . $this->_optionsString($options);
 		return $this->Html->image($url);
 	}
-	
+
 	/**
 	 * Send a SMS to a given number
 	 * 
 	 * @param string $number
 	 * @param array $options options array, see helper vars for description of parameters
 	 */
-	function sms($number = '', $options = array()) {
+	public function sms($number = '', $options = array()) {
 		return $this->Html->image($this->base_url . urlencode('sms:' . $number) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * Send a MMS to a given number
 	 * 
 	 * @param string $number
 	 * @param array $options options array, see helper vars for description of parameters
 	 */
-	function mms($number = '', $options = array()) {
+	public function mms($number = '', $options = array()) {
 		return $this->Html->image($this->base_url . urlencode('mms:' . $number) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * A geo URI may be used to encode a point on the earth, including altitude.
 	 * For example, to encode the Google's New York office, which is at 40.71872 deg N latitude, 73.98905 deg W longitude, 
@@ -175,7 +174,7 @@ class QrHelper extends AppHelper {
 	 * @param $geo
 	 * @param mixed $options options array, see helper vars for description of parameters
 	 */
-	function geo($geo = array(), $options = array()) {
+	public function geo($geo = array(), $options = array()) {
 		if (!isset($geo['lat'])) {
 			$geo['lat'] = '';
 		}
@@ -187,7 +186,7 @@ class QrHelper extends AppHelper {
 		}
 		return $this->Html->image($this->base_url . urlencode('geo:' . $geo['lat'] . ',' . $geo['lon'] . ',' . $geo['height']) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * Searches the android market. $app Syntax:
 	 * 'foobar' to just search
@@ -196,10 +195,10 @@ class QrHelper extends AppHelper {
 	 * @param $app
 	 * @param $options
 	 */
-	function market($app = '', $options = array()) {
+	public function market($app = '', $options = array()) {
 		return $this->Html->image($this->base_url . urlencode('market://search?q=' . $app) . $this->_optionsString($options));
 	}
-	
+
 	/**
 	 * An iCal Event
 	 * 
@@ -214,7 +213,7 @@ class QrHelper extends AppHelper {
 	 * @param array $event Event param array
 	 * @param mixed $options options array, see helper vars for description of parameters
 	 */
-	function event($event = array(), $options = array()) {
+	public function event($event = array(), $options = array()) {
 		$ret = 'BEGIN:VEVENT';
 		if (isset($event['summary'])) {
 			$ret .= "\n".'SUMMARY:'.$event['summary'];
@@ -234,14 +233,14 @@ class QrHelper extends AppHelper {
 		$ret .= "\n".'END:VEVENT';
 		return $this->Html->image($this->base_url . urlencode($ret) . $this->_optionsString($options));
 	}
-	
+
 	/** 
 	 * Takes the options array, merges it with the default values and returns all options as url parameter string
 	 * 
 	 * @param mixed $options options array, see helper vars for description of parameters
 	 * @return string url parameter string
 	 */
-	function _optionsString($options) {
+	protected function _optionsString($options) {
 		if (!isset($options['size'])) {
 			$options['size'] = $this->size;
 		}
@@ -256,5 +255,4 @@ class QrHelper extends AppHelper {
 		}
 		return '&chs='.$options['size'].'&choe='.$options['encode'].'&chld='.$options['error_correction'].'|'.$options['margin'];
 	}
-
 }

@@ -38,8 +38,8 @@ class QrHelperTest extends CakeTestCase {
  * testUrl
  */
 	public function testUrl() {
-		$result = $this->Qr->url('dontkry.com');
-		$expected = '<img src="http://chart.apis.google.com/chart?cht=qr&chl=http%3A%2F%2Fdev%2Fdontkry.com&chs=350x350&choe=UTF-8&chld=L|4" alt="" />';
+		$result = $this->Qr->url('http://dontkry.com');
+		$expected = '<img src="http://chart.apis.google.com/chart?cht=qr&chl=http%3A%2F%2Fdontkry.com&chs=350x350&choe=UTF-8&chld=L|4" alt="" />';
 		$this->assertEquals($expected, $result);
 	}
 
